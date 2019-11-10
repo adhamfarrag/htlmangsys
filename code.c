@@ -5,7 +5,6 @@
 #include <unistd.h>
 #include <ctype.h>
 
-
 struct booking
 {
     char guest[20];
@@ -16,7 +15,6 @@ struct booking
     char checkout[20];
 } ubk;
 
-
 struct user
 {
     char usid[20];
@@ -26,14 +24,12 @@ struct user
     char gender[2];
 } uzr;
 
-
 struct room
 {
     char roomnumber[20];
     char roomtype[20];
     char roomcapacity[20];
 } rom;
-
 
 char option[20];
 FILE *fp;
@@ -128,7 +124,7 @@ int deletebook()
 {
     fp = fopen("bookings", "r");
     fpt = fopen("tempfile", "w");
-    fpc = fopen("cancelled", "w");
+    fpc = fopen("cancelled", "a");
 
     while (fread(&ubk, sizeof(ubk), 1, fp))
     {
@@ -157,7 +153,6 @@ int deletebook()
     clear();
     printf("\nYour Booking is canceled successfully.\n\n");
     mainmenu();
-
     return 0;
 }
 
@@ -185,10 +180,8 @@ int editbook(void)
     }
     fclose(fp);
     fclose(fpt);
-
     userbooking();
     clear();
-
     return 0;
 }
 
@@ -427,12 +420,10 @@ int addroom(void)
     scanf("%s", rom.roomtype);
     printf("Room Capacity : ");
     scanf("%s", rom.roomcapacity);
-
     fp = fopen("rooms", "a");
     fwrite(&rom, sizeof(rom), 1, fp);
     fclose(fp);
     clear();
-
     printf("\nDone. Room Added Successfully.\n");
     adminmenu();
     return 0;
@@ -529,10 +520,8 @@ int login(void)
     int marker = 0;
     printf("Please, Enter your Username :  ");
     scanf(" %s", userid);
-
     printf("Please, Enter your Password :  ");
     scanf(" %s", pass);
-
     fp = fopen("users", "r");
 
     while (fread(&uzr, sizeof(uzr), 1, fp))
@@ -629,7 +618,6 @@ int registeration(void)
                 scanf(" %s", uzr.uage);
                 printf("Please, Enter your Gender:  ");
                 scanf(" %s", uzr.gender);
-
                 fp = fopen("users", "a");
                 fwrite(&uzr, sizeof(uzr), 1, fp);
                 fclose(fp);
@@ -649,7 +637,6 @@ int registeration(void)
         scanf(" %s", uzr.uage);
         printf("Please, Enter your Gender:  ");
         scanf(" %s", uzr.gender);
-
         fp = fopen("users", "a");
         fwrite(&uzr, sizeof(uzr), 1, fp);
         fclose(fp);
